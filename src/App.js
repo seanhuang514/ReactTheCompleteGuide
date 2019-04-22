@@ -29,7 +29,8 @@ class App extends Component {
       people: [
         { name: newName, age: 11 },
         { name: 'sean2222', age: 222 }
-      ]
+      ],
+      showPeople: false
     }, () => console.log(this.state)) 
   };
 
@@ -41,6 +42,7 @@ class App extends Component {
       ]
     }, () => console.log(this.state))
   };
+
   myStyle = () => {
     return {
       backgroundColor: 'white',
@@ -50,6 +52,15 @@ class App extends Component {
       marginRight: '5px',
     }
   }
+
+  togglePeople = () => {
+    const isShowPeople = this.state.showPeople
+    this.setState({
+      showPeople: !isShowPeople
+    })
+  }
+
+
   render() {
     const style = {
       marginRight: '5px',
@@ -69,14 +80,21 @@ class App extends Component {
         {/* 兩種帶參數給 function 的方法 */}
         <button style={style} onClick={() => this.switchNameHandle2('QQQ')}>Switch name 2</button>
         <button onClick={this.switchNameHandle2.bind(this,'WWWW')}>Switch name 3</button>
-        <Person 
-          name={this.state.people[0].name}
-          age={this.state.people[0].age}
-          click={this.switchNameHandle2.bind(this,'WWWW')}
-          changed={this.onChangeHandler}
-        >
-        </Person>
-        <Person name={this.state.people[1].name} age={this.state.people[1].age}></Person>
+        <button onClick={this.togglePeople}>Toggle People</button>
+        {
+          this.state.showPeople ?
+            <div>
+              <Person 
+              name={this.state.people[0].name}
+              age={this.state.people[0].age}
+              click={this.switchNameHandle2.bind(this,'WWWW')}
+              changed={this.onChangeHandler}
+              >
+              </Person>
+              <Person name={this.state.people[1].name} age={this.state.people[1].age}></Person>
+            </div>
+          : null
+        }
       </div>
     );
   }
