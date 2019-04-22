@@ -1,9 +1,11 @@
 import React from 'react';
 
 const person = (props) => {
+  const personDefaultName = 'Person default name';
+  
   return (
     <div>
-      <p>My name is {props.name} and my age is {props.age}</p>
+      <p onClick={props.click.bind(this, personDefaultName)}>My name is {props.name} and my age is {props.age}</p>
       <p>{props.children}</p>
     </div>
   )
