@@ -8,7 +8,7 @@ class App extends Component {
       { name: 'kuro', age: 22 },
     ],
     another: 'another'
-  }
+  };
 
   switchNameHandle = () => {
     this.setState( {
@@ -22,7 +22,7 @@ class App extends Component {
       state 定義一開始 class component 的狀態， 用 this.setState 去設定新的值
       新值跟舊值會自動 merge 成一份 data
     */} 
-  }
+  };
 
   switchNameHandle2 = (newName='EEEE') => {
     this.setState( {
@@ -31,7 +31,16 @@ class App extends Component {
         { name: 'sean2222', age: 222 }
       ]
     }, () => console.log(this.state)) 
-  }
+  };
+
+  onChangeHandler = (event) => {
+    this.setState( {
+      people: [
+        { name: event.target.value, age: 11 },
+        { name: 'kuro', age: 22 }
+      ]
+    }, () => console.log(this.state))
+  };
 
   render() {
     return (
@@ -48,6 +57,7 @@ class App extends Component {
           name={this.state.people[0].name}
           age={this.state.people[0].age}
           click={this.switchNameHandle2.bind(this,'WWWW')}
+          changed={this.onChangeHandler}
         >
         </Person>
         <Person name={this.state.people[1].name} age={this.state.people[1].age}></Person>
