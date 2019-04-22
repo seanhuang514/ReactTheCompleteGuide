@@ -61,9 +61,11 @@ class App extends Component {
   }
 
   deletePersonHandle = (personIndex) => {
-    const people = this.state.people;
-    people.splice(personIndex, 1); // bad practice, because of it mutate this original data
-    console.log(this.state.people)
+    // const people = this.state.people.slice(1);//good practice, because of it won't mutate the original data
+    // console.log(this.state.people) //[{…}, {…}]
+    // or
+    const people = [...this.state.people] // use [] array to wrap spread operator(equal copy array)
+    people.splice(personIndex, 1)
     this.setState({
       people: people
     })
