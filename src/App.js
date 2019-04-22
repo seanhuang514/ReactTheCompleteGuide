@@ -7,7 +7,8 @@ class App extends Component {
       { name: 'sean', age: 11 },
       { name: 'kuro', age: 22 },
     ],
-    another: 'another'
+    another: 'another',
+    showPeople: false
   };
 
   switchNameHandle = () => {
@@ -29,8 +30,7 @@ class App extends Component {
       people: [
         { name: newName, age: 11 },
         { name: 'sean2222', age: 222 }
-      ],
-      showPeople: false
+      ]
     }, () => console.log(this.state)) 
   };
 
@@ -70,6 +70,23 @@ class App extends Component {
       cursor: 'pointer'
     }
 
+    let people = null;
+
+    if(this.state.showPeople) {
+      people = (
+        <div>
+          <Person 
+          name={this.state.people[0].name}
+          age={this.state.people[0].age}
+          click={this.switchNameHandle2.bind(this,'WWWW')}
+          changed={this.onChangeHandler}
+          >
+          </Person>
+          <Person name={this.state.people[1].name} age={this.state.people[1].age}></Person>
+        </div>
+      );
+    }
+
     return (
       <div className="App">
         <h1>I am a React App</h1>
@@ -81,20 +98,7 @@ class App extends Component {
         <button style={style} onClick={() => this.switchNameHandle2('QQQ')}>Switch name 2</button>
         <button onClick={this.switchNameHandle2.bind(this,'WWWW')}>Switch name 3</button>
         <button onClick={this.togglePeople}>Toggle People</button>
-        {
-          this.state.showPeople ?
-            <div>
-              <Person 
-              name={this.state.people[0].name}
-              age={this.state.people[0].age}
-              click={this.switchNameHandle2.bind(this,'WWWW')}
-              changed={this.onChangeHandler}
-              >
-              </Person>
-              <Person name={this.state.people[1].name} age={this.state.people[1].age}></Person>
-            </div>
-          : null
-        }
+        { people }
       </div>
     );
   }
