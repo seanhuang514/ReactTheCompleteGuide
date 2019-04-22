@@ -50,7 +50,7 @@ class App extends Component {
           click={this.switchNameHandle2}
         >
         </Person>
-        {/* <Person name={this.state.people[1].name} age={this.state.people[1].age}></Person> */}
+        <Person name={this.state.people[1].name} age={this.state.people[1].age}></Person>
       </div>
     );
   }
