@@ -41,17 +41,33 @@ class App extends Component {
       ]
     }, () => console.log(this.state))
   };
-
+  myStyle = () => {
+    return {
+      backgroundColor: 'white',
+      border: '1px solid blue',
+      padding: '8px',
+      cursor: 'pointer',
+      marginRight: '5px',
+    }
+  }
   render() {
+    const style = {
+      marginRight: '5px',
+      backgroundColor: 'white',
+      border: '1px solid red',
+      padding: '8px',
+      cursor: 'pointer'
+    }
+
     return (
       <div className="App">
         <h1>I am a React App</h1>
         <p>TEST</p>
         {/* React 的 click event 要用 onClick 而不是用 native js 的 onclick，然後呼叫的時候不用 ()  */}
-        <button onClick={this.switchNameHandle}>Switch name</button>
+        <button style={this.myStyle()} onClick={this.switchNameHandle}>Switch name</button>
 
         {/* 兩種帶參數給 function 的方法 */}
-        <button onClick={() => this.switchNameHandle2('QQQ')}>Switch name 2</button>
+        <button style={style} onClick={() => this.switchNameHandle2('QQQ')}>Switch name 2</button>
         <button onClick={this.switchNameHandle2.bind(this,'WWWW')}>Switch name 3</button>
         <Person 
           name={this.state.people[0].name}
