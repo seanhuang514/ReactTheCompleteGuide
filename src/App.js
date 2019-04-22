@@ -60,6 +60,15 @@ class App extends Component {
     })
   }
 
+  deletePersonHandle = (personIndex) => {
+    const people = this.state.people;
+    people.splice(personIndex, 1); // bad practice, because of it mutate this original data
+    console.log(this.state.people)
+    this.setState({
+      people: people
+    })
+  }
+
 
   render() {
     const style = {
@@ -76,8 +85,14 @@ class App extends Component {
       people = (
         <div>
           {
-            this.state.people.map(person => {
-              return <Person name={person.name} age={person.age}></Person>
+            this.state.people.map((person, index) => {
+              return <Person 
+                        name={person.name} 
+                        age={person.age}
+                        click={this.deletePersonHandle.bind(this, index)}
+                        // or
+                        // click={() => this.deletePersonHandle(index)}
+                        />
             })
           }
         </div>
