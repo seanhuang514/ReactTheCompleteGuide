@@ -47,7 +47,7 @@ class App extends Component {
         <Person 
           name={this.state.people[0].name}
           age={this.state.people[0].age}
-          click={this.switchNameHandle2}
+          click={this.switchNameHandle2.bind(this,'WWWW')}
         >
         </Person>
         <Person name={this.state.people[1].name} age={this.state.people[1].age}></Person>
