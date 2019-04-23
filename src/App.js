@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person'
-import Radium from 'radium'
+import Radium, { StyleRoot } from 'radium'
 class App extends Component {
   state = {
     people: [
@@ -147,7 +147,9 @@ class App extends Component {
         <button style={style} onClick={() => this.switchNameHandle2('QQQ')}>Switch name 2</button>
         <button onClick={this.switchNameHandle2.bind(this,'WWWW')}>Switch name 3</button>
         <button onClick={this.togglePeople}>Toggle People</button>
-        { people }
+        <StyleRoot>
+          { people }
+        </StyleRoot>
       </div>
     );
   }
