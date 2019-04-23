@@ -116,11 +116,20 @@ class App extends Component {
 
       style.backgroundColor = 'red';
     }
+    const classes = []
+
+    if(this.state.people.length <= 2){
+      classes.push('bold');
+    }
+
+    if(this.state.people.length <= 1){
+      classes.push('red');
+    }
 
     return (
       <div className="App">
         <h1>I am a React App</h1>
-        <p>TEST</p>
+        <p className={classes.join(' ')}>Dynamic class</p>
         {/* React 的 click event 要用 onClick 而不是用 native js 的 onclick，然後呼叫的時候不用 ()  */}
         <button style={this.myStyle()} onClick={this.switchNameHandle}>Switch name</button>
 
