@@ -4,8 +4,8 @@ import Person from './Person/Person'
 class App extends Component {
   state = {
     people: [
-      { name: 'sean', age: 11 },
-      { name: 'kuro', age: 22 },
+      { index: '1', name: 'sean', age: 11 },
+      { index: '2', name: 'huang', age: 22 },
     ],
     another: 'another',
     showPeople: false
@@ -64,8 +64,10 @@ class App extends Component {
     // const people = this.state.people.slice(1);//good practice, because of it won't mutate the original data
     // console.log(this.state.people) //[{…}, {…}]
     // or
+    
     const people = [...this.state.people] // use [] array to wrap spread operator(equal copy array)
     people.splice(personIndex, 1)
+    console.log(people)
     this.setState({
       people: people
     })
@@ -94,6 +96,7 @@ class App extends Component {
                         click={this.deletePersonHandle.bind(this, index)}
                         // or
                         // click={() => this.deletePersonHandle(index)}
+                        key={person.index}
                         />
             })
           }
