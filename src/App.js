@@ -4,11 +4,11 @@ import Person from './Person/Person'
 class App extends Component {
   state = {
     people: [
-      { index: '1', name: 'sean', age: 11 },
-      { index: '2', name: 'huang', age: 22 },
+      { id: 'uniq1', name: 'sean', age: 11 },
+      { id: 'uniq2', name: 'huang', age: 22 },
     ],
     another: 'another',
-    showPeople: false
+    showPeople: true
   };
 
   switchNameHandle = () => {
@@ -34,13 +34,24 @@ class App extends Component {
     }, () => console.log(this.state)) 
   };
 
-  onChangeHandler = (event) => {
-    this.setState( {
-      people: [
-        { name: event.target.value, age: 11 },
-        { name: 'kuro', age: 22 }
-      ]
-    }, () => console.log(this.state))
+  onChangeHandler = (event, id) => {
+    const personIndex = this.state.people.findIndex(p => {
+      return p.id === id;
+    });
+    
+    //Important！！
+    //要改變 state 裡的值的時候維持原始的 data 不被變動 (Immutable data)
+    //所以要改的值都必須要複製一份出來改(作為一個新的object)
+    // Preference: https://blog.techbridge.cc/2018/01/05/react-render-optimization/
+    const copyPerson = {...this.state.people[personIndex]};
+    const copyPeople = [...this.state.people];
+
+    copyPerson.name = event.target.value;
+    copyPeople[personIndex] = copyPerson;
+
+    this.setState({
+      people: copyPeople
+    });
   };
 
   myStyle = () => {
@@ -96,7 +107,8 @@ class App extends Component {
                         click={this.deletePersonHandle.bind(this, index)}
                         // or
                         // click={() => this.deletePersonHandle(index)}
-                        key={person.index}
+                        key={person.id}
+                        changed={(event) => this.onChangeHandler(event, person.id)}
                         />
             })
           }
