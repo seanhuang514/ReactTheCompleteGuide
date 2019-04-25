@@ -9,3 +9,23 @@
 .bold {
   font-weight: bold;
 }
+
+.App button.Green {
+  margin-right: '5px';
+  background-color: green;
+  border: '1px solid red';
+  padding: '8px';
+  cursor: 'pointer';
+}
+
+.App button.Green:hover {
+  background-color: lightgreen;
+}
+
+.App button.Red {
+  background-color: red;
+}
+
+.App button.Red:hover {
+  background-color: lightpink;
+}

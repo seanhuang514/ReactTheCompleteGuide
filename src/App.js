@@ -86,15 +86,8 @@ class App extends Component {
   }
 
   render() {
-    const style = {
-      marginRight: '5px',
-      backgroundColor: 'green',
-      border: '1px solid red',
-      padding: '8px',
-      cursor: 'pointer'
-    }
-
     let people = null;
+    let btnClass = classes.Green;
 
     if(this.state.showPeople) {
       people = (
@@ -115,7 +108,7 @@ class App extends Component {
         </div>
       );
 
-      style.backgroundColor = 'red';
+      btnClass = classes.Red
     }
 
     const assignedClasses = []
@@ -136,7 +129,7 @@ class App extends Component {
         <button style={this.myStyle()} onClick={this.switchNameHandle}>Switch name</button>
 
         {/* 兩種帶參數給 function 的方法 */}
-        <button style={style} onClick={() => this.switchNameHandle2('QQQ')}>Switch name 2</button>
+        <button className={btnClass} onClick={() => this.switchNameHandle2('QQQ')}>Switch name 2</button>
         <button onClick={this.switchNameHandle2.bind(this,'WWWW')}>Switch name 3</button>
         <button onClick={this.togglePeople}>Toggle People</button>
           { people }
