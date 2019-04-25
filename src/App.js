@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person'
 
 class App extends Component {
@@ -118,20 +118,20 @@ class App extends Component {
       style.backgroundColor = 'red';
     }
 
-    const classes = []
+    const assignedClasses = []
 
     if(this.state.people.length <= 2){
-      classes.push('bold');
+      assignedClasses.push(classes.red);
     }
 
     if(this.state.people.length <= 1){
-      classes.push('red');
+      assignedClasses.push(classes.bold);
     }
 
     return (
-      <div className="App">
+      <div className={classes.App}>
         <h1>I am a React App</h1>
-        <p className={classes.join(' ')}>Dynamic class</p>
+        <p className={assignedClasses.join(' ')}>Dynamic class</p>
         {/* React 的 click event 要用 onClick 而不是用 native js 的 onclick，然後呼叫的時候不用 ()  */}
         <button style={this.myStyle()} onClick={this.switchNameHandle}>Switch name</button>
 
