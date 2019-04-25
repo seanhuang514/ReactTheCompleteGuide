@@ -2,6 +2,7 @@ import React from 'react';
 import classes from './Person.css'
 
 const person = (props) => {
+  throw new Error('Errorrrrr!');
 
   return (
     <div className={classes.Person}>

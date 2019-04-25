@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classes from './App.css';
 import Person from './Person/Person'
-
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
 class App extends Component {
   state = {
     people: [
@@ -132,7 +132,9 @@ class App extends Component {
         <button className={btnClass} onClick={() => this.switchNameHandle2('QQQ')}>Switch name 2</button>
         <button onClick={this.switchNameHandle2.bind(this,'WWWW')}>Switch name 3</button>
         <button onClick={this.togglePeople}>Toggle People</button>
+        <ErrorBoundary>
           { people }
+        </ErrorBoundary>
       </div>
     );
   }
