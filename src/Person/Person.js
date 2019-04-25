@@ -1,15 +1,10 @@
 import React from 'react';
-import Radium from 'radium';
 
 import './Person.css'
 const person = (props) => {
-  const style = {
-    '@media (min-width: 800px)': {
-        width: '400px'
-    }
-};
+
   return (
-    <div className="Person" style={style}>
+    <div className="Person">
       <p>My name is {props.name} and my age is {props.age}</p>
       <p>{props.children}</p>
       {/* 
@@ -27,4 +22,4 @@ const person = (props) => {
 // props.name #=> 'xxx'
 // props.age #=> '123'
 // props.children #=> <p>childern</p>
-export default Radium(person)
+export default person
