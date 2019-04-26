@@ -16,7 +16,7 @@ const Cockpit = (props) => {
 
   return (
     <div>
-      <h1>I am a React App</h1>
+      <h1>{props.title}</h1>
       <p className={assignedClasses.join(' ')}>Dynamic class</p>
       <button className={btnClass} onClick={props.clicked}>Toggle People</button>
     </div>
