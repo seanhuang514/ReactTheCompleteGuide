@@ -13,7 +13,11 @@ class Persons extends Component {
     console.log('[Persons.js ] shouldComponentUpdated nextProps', nextProps);
     console.log('[Persons.js ] shouldComponentUpdated nextState', nextState);
     /* return boolean 用來決定是否 update component */
-    return true
+    if (nextProps.persons !== this.props.persons) {
+      return true;
+    }else {
+      return false;
+    }
   }
 
   /* 會接收改變之前的 props & state，然後可以 return 值給 componentDidUpdate */
