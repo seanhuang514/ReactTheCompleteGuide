@@ -4,14 +4,73 @@ import Persons from '../components/Persons/Persons'
 import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary'
 import Cockpit from '../components/Cockpit/Cockpit'
 class App extends Component {
-  state = {
-    people: [
-      { id: 'uniq1', name: 'sean', age: 11 },
-      { id: 'uniq2', name: 'huang', age: 22 },
-    ],
-    another: 'another',
-    showPeople: false
-  };
+  constructor(props){
+    console.log('[App.js constructor]', props)
+    /**
+     * 在 constructor 裡面初始化 state 要用 this.state，然後在這之前一定要 call
+     * super(props)
+     */
+    super(props)
+    this.state = {
+      people: [
+        { id: 'uniq1', name: 'sean', age: 11 },
+        { id: 'uniq2', name: 'huang', age: 22 },
+      ],
+      another: 'another',
+      showPeople: true
+    };
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    /*
+    https://5xruby.tw/posts/react-16-lifecycle-methods/
+    從 props 設定 state 這段程式碼完全可以放在 constructor，拿來放在 getDerivedStateFromProps 好處是更加的直覺，他就純粹是用來設定 state，但在 constructor 裡面是還有可能做一些其他的事。
+     */
+    console.log('[App.js getDerivedStateFromProps props]', props)
+    console.log('[App.js getDerivedStateFromProps state]', state)
+
+    /**
+     * 沒有要改變 state 的話可以直接 return state，如果需要新增加 state 的話
+    可以 return 要新增的 state 這樣他會自動 merge 到現有的 state 
+    (不建議因為每次重新render的時候都會覆蓋你 return 回去的 state)
+
+    return {test: 'test'}
+     */
+    return state
+
+    /*如果要在 return initial state 的話會出現這樣的 error
+    Warning: `App` uses `getDerivedStateFromProps` but its initial state is undefined. This is not recommended. Instead, define the initial state by assigning an object to `this.state` in the constructor of `App`. This ensures that `getDerivedStateFromProps` arguments have a consistent shape.
+    所以如果真的要在這邊 initial state 的話，要先在 constructor 裡 initial 一個空的 state
+
+    return {
+      people: [
+        { id: 'uniq1', name: 'sean', age: 11 },
+        { id: 'uniq2', name: 'huang', age: 22 },
+      ],
+      another: 'another',
+      showPeople: false
+    };
+    */
+  }
+  /**
+   * Warning: Unsafe legacy lifecycles will not be called for components using new component APIs.
+     App uses getDerivedStateFromProps() but also contains the following legacy lifecycles:
+     componentWillMount
+     The above lifecycles should be removed. Learn more about this warning here:
+
+     當你使用 get­Derived­State­From­Props，也同時使用componentWillMount，WillMount會不執行，並且console會傳出警告，另外就算改用UNSAFE_componentWillMount也不會執行。
+     componentWillMount(){
+       console.log('[App.js] componentWillMount')
+     }
+   */
+
+  componentDidMount(){
+    /**
+     * 在 child component render 完之後才會觸發。
+     */
+    console.log('[App.js] componentDidMount')
+  }
+  
 
   switchNameHandle = () => {
     this.setState( {
@@ -87,6 +146,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('[App.js] render state', this.state)
     let people = null;
 
     if(this.state.showPeople) {
