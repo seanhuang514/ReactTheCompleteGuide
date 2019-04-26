@@ -3,7 +3,7 @@ import classes from './Person.css'
 
 const person = (props) => {
   // throw new Error('Errorrrrr!');
-
+  console.log('[Person.js] Person rendering')
   return (
     <div className={classes.Person}>
       <p>My name is {props.name} and my age is {props.age}</p>
