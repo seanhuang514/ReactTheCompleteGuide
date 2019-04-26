@@ -11,9 +11,9 @@ const Cockpit = (props) => {
     console.log('[Cockpit.js] useEffect componentDidMount');
 
     // simulate Http request
-    setTimeout(() => {
-      alert('Fetch data')
-    }, 1000)
+    // setTimeout(() => {
+    //   alert('Fetch data')
+    // }, 1000);
 
     
     
@@ -40,12 +40,17 @@ const Cockpit = (props) => {
     */
   },[])
 
+  useEffect(() => {
+    console.log('[Cockpit.js] 2nd useEffect');
+    return () => console.log('[Cockpit.js] 2nd useEffect un-mount');
+  })
+
   if(props.showPersons) btnClass = classes.Red;
-  if(props.persons.length <= 2){
+  if(props.personsLength <= 2){
     assignedClasses.push(classes.red);
   }
 
-  if(props.persons.length <= 1){
+  if(props.personsLength <= 1){
     assignedClasses.push(classes.bold);
   }
 
@@ -58,4 +63,11 @@ const Cockpit = (props) => {
   )
 }
 
-export default Cockpit
+export default React.memo(Cockpit)
+/* 
+memo only re-renders if props change 
+所以沒有用memo包起來之前 person change的時候 cockpit 都會 re-render
+但 person updated 的時候 cockpit 不應該也跟著 re-render
+所以要把傳進來的 props.persons 改成只傳 length 進來，這樣當 props.persons 改變的時候
+cockpit 就不會重新 re-render了
+*/
