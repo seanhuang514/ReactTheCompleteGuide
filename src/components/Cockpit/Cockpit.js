@@ -10,13 +10,20 @@ const Cockpit = (props) => {
     //相當於 class-base component 裡的 componentDidMount
     console.log('[Cockpit.js] useEffect componentDidMount');
 
-    //simulate Http request
+    // simulate Http request
     setTimeout(() => {
       alert('Fetch data')
     }, 1000)
 
-    // return function 裡的行為相當於 class-base component 裡的 componentWillUnmount
-    return () => console.log('[Cockpit.js] useEffect componentWillUnmount');
+    
+    
+    return () => {
+      /*
+      return function 裡的行為相當於 class-base component 裡的 componentWillUnmount 
+      在 useEffect 有帶第二個參數並且 array 裡的值有變動的時候會觸發
+    */
+      console.log('[Cockpit.js] useEffect componentWillUnmount');
+    }
 
     /* useEffect 的第二個參數可以帶入一個 array
        第二個參數是此 effect 的 dependency，

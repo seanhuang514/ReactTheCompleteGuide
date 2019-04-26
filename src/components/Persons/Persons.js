@@ -30,6 +30,11 @@ class Persons extends Component {
     console.log('[Persons.js ] componentDidUpdate', 'snapShout', snapShot); //message: 'Snapshot!!'
   }
 
+  componentWillUnmount(){
+    /* component 被從畫面上移除的時候觸發 */
+    console.log('[Persons.js ] componentWillUnmount');
+  }
+
   render() {
     return (
       this.props.persons.map((person, index) => {
