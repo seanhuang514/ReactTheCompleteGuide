@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import classes from './App.css';
 import Persons from '../components/Persons/Persons'
 import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary'
+import Cockpit from '../components/Cockpit/Cockpit'
 class App extends Component {
   state = {
     people: [
@@ -87,37 +88,20 @@ class App extends Component {
 
   render() {
     let people = null;
-    let btnClass = classes.Green;
 
     if(this.state.showPeople) {
       people = <Persons 
                   persons={this.state.people}
                   clicked={this.deletePersonHandle}
                   changed={this.onChangeHandler}/>
-      btnClass = classes.Red
-    }
-
-    const assignedClasses = []
-
-    if(this.state.people.length <= 2){
-      assignedClasses.push(classes.red);
-    }
-
-    if(this.state.people.length <= 1){
-      assignedClasses.push(classes.bold);
     }
 
     return (
       <div className={classes.App}>
-        <h1>I am a React App</h1>
-        <p className={assignedClasses.join(' ')}>Dynamic class</p>
-        {/* React 的 click event 要用 onClick 而不是用 native js 的 onclick，然後呼叫的時候不用 ()  */}
-        <button style={this.myStyle()} onClick={this.switchNameHandle}>Switch name</button>
-
-        {/* 兩種帶參數給 function 的方法 */}
-        <button className={btnClass} onClick={() => this.switchNameHandle2('QQQ')}>Switch name 2</button>
-        <button onClick={this.switchNameHandle2.bind(this,'WWWW')}>Switch name 3</button>
-        <button onClick={this.togglePeople}>Toggle People</button>
+        <Cockpit 
+          showPersons={this.state.showPeople}
+          persons={this.state.people}
+          clicked={this.togglePeople}/>
         <ErrorBoundary>
           { people }
         </ErrorBoundary>

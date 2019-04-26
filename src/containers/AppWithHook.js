@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import Person from '../components/Person/Person'
+import Person from '../components/Persons/Person/Person'
 const appWithHook = props => {
   // useState會回傳兩個 element 在 array裡
   // 第一個是 get state 用，第二個是 set state 用
