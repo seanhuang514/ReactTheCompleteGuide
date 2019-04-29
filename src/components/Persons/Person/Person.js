@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from './Person.css'
 import Aux from '../../../higherOrderComponent/Aux'
+import withClass from '../../../higherOrderComponent/withClass'
 const person = (props) => {
   // throw new Error('Errorrrrr!');
   console.log('[Person.js] Person rendering')
@@ -30,4 +31,5 @@ const person = (props) => {
 // props.name #=> 'xxx'
 // props.age #=> '123'
 // props.children #=> <p>childern</p>
-export default person
+/* App -> Persons -> withClass -> Person */
+export default withClass(person, classes.Person)
