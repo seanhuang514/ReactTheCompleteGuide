@@ -3,6 +3,7 @@ import classes from './App.css';
 import Persons from '../components/Persons/Persons'
 import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary'
 import Cockpit from '../components/Cockpit/Cockpit'
+import WithClass from '../higherOrderComponent/WithClass'
 class App extends Component {
   constructor(props){
     console.log('[App.js constructor]', props)
@@ -158,7 +159,7 @@ class App extends Component {
     }
 
     return (
-      <div className={classes.App}>
+      <WithClass classes={classes.App}>
         <button onClick={() => { this.setState({ showCockpit: false }) }}>Remove Cockpit</button>
         
           {
@@ -174,7 +175,7 @@ class App extends Component {
         <ErrorBoundary>
           { people }
         </ErrorBoundary>
-      </div>
+      </WithClass>
     );
   }
 }
