@@ -1,8 +1,10 @@
 import React from 'react';
-import classes from './Person.css'
-import Aux from '../../../higherOrderComponent/Aux'
-import withClass from '../../../higherOrderComponent/withClass'
-const person = (props) => {
+import classes from './Person.css';
+import Aux from '../../../higherOrderComponent/Aux';
+import withClass from '../../../higherOrderComponent/withClass';
+import PropTypes from 'prop-types';
+
+const Person = (props) => {
   // throw new Error('Errorrrrr!');
   console.log('[Person.js] Person rendering')
   return (
@@ -27,9 +29,16 @@ const person = (props) => {
   )
 }
 
+Person.propTypes = {
+  name: PropTypes.string,
+  age: PropTypes.number,
+  click: PropTypes.func,
+  changed: PropTypes.func
+}
+
 //<Person name="xxx", age="123"><p>childern</p></Person>
 // props.name #=> 'xxx'
 // props.age #=> '123'
 // props.children #=> <p>childern</p>
 /* App -> Persons -> withClass -> Person */
-export default withClass(person, classes.Person)
+export default withClass(Person, classes.Person)
