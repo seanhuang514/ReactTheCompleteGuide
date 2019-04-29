@@ -5,7 +5,14 @@ const person = (props) => {
   // throw new Error('Errorrrrr!');
   console.log('[Person.js] Person rendering')
   return (
-    <Aux>
+    /* 
+    you also can use Fragment from React, and don't forget import it
+    import React, { Fragment } from 'react';
+    <Fragment>
+      children elements
+    </Fragment>
+    */
+    <Aux> 
       <p key="e1">My name is {props.name} and my age is {props.age}</p>
       <p key="e2">{props.children}</p>
       {/*
