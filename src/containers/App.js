@@ -20,7 +20,8 @@ class App extends Component {
       ],
       another: 'another',
       showPeople: false,
-      showCockpit: true
+      showCockpit: true,
+      changedCounter: 0
     };
   }
 
@@ -113,9 +114,23 @@ class App extends Component {
     copyPerson.name = event.target.value;
     copyPeople[personIndex] = copyPerson;
 
+    /* 
+    * Don't do this way to update state if the state you need to update is depend on old state
+    * because set state does not immediately trigger
+    * You call set state synchronously here but it's not guaranteed to execute and finish immediately 
+    * 
     this.setState({
-      people: copyPeople
-    });
+      people: copyPeople,
+      changedCounter: this.state.changedCounter + 1
+    }); 
+    */
+
+    this.setState((prevState, props) => {
+      return {
+        people: copyPeople,
+        changedCounter: prevState.changedCounter + 1
+      }
+    })
   };
 
   myStyle = () => {
