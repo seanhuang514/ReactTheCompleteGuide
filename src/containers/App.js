@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import classes from './App.css';
-import Persons from '../components/Persons/Persons'
-import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary'
-import Cockpit from '../components/Cockpit/Cockpit'
-import withClass from '../higherOrderComponent/withClass'
-import Aux from '../higherOrderComponent/Aux'
+import Persons from '../components/Persons/Persons';
+import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
+import Cockpit from '../components/Cockpit/Cockpit';
+import withClass from '../higherOrderComponent/withClass';
+import Aux from '../higherOrderComponent/Aux';
+import AuthContext from '../context/auth-context';
+
 class App extends Component {
   constructor(props){
     console.log('[App.js constructor]', props)
@@ -21,7 +23,8 @@ class App extends Component {
       another: 'another',
       showPeople: false,
       showCockpit: true,
-      changedCounter: 0
+      changedCounter: 0,
+      isLogin: false
     };
   }
 
@@ -163,6 +166,10 @@ class App extends Component {
     })
   }
 
+  loginHandler = () => {
+    this.setState({ isLogin: true });
+  }
+
   render() {
     console.log('[App.js] render state', this.state)
     let people = null;
@@ -177,7 +184,7 @@ class App extends Component {
     return (
       <Aux>
         <button onClick={() => { this.setState({ showCockpit: false }) }}>Remove Cockpit</button>
-        
+        <AuthContext.Provider value={{isLogin: this.state.isLogin, loginHandler: this.loginHandler}}>
           {
             this.state.showCockpit ?
               <Cockpit 
@@ -186,11 +193,11 @@ class App extends Component {
               personsLength={this.state.people.length}
               clicked={this.togglePeople}/>
             : null
-
           }
-        <ErrorBoundary>
-          { people }
-        </ErrorBoundary>
+          <ErrorBoundary>
+            { people }
+          </ErrorBoundary>
+        </AuthContext.Provider>
       </Aux>
     );
   }

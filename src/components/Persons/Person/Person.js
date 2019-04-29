@@ -3,6 +3,7 @@ import classes from './Person.css';
 import Aux from '../../../higherOrderComponent/Aux';
 import withClass from '../../../higherOrderComponent/withClass';
 import PropTypes from 'prop-types';
+import AuthContext from '../../../context/auth-context'
 
 class Person extends PureComponent {
   // throw new Error('Errorrrrr!');
@@ -26,7 +27,13 @@ class Person extends PureComponent {
         children elements
       </Fragment>
       */
-      <Aux> 
+      <Aux>
+        <AuthContext.Consumer>
+          {(context) => {
+            console.log('AuthContext', context)
+            return context.isLogin ? <p>Authentcated!</p> : <p>Please Login</p>
+          }}
+        </AuthContext.Consumer>
         <p key="e1">My name is {this.props.name} and my age is {this.props.age}</p>
         <p key="e2">{this.props.children}</p>
         {/*

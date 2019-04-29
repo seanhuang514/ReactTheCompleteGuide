@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import classes from './Cockpit.css'
-
+import AuthContext from '../../context/auth-context'
 const Cockpit = (props) => {
   let btnClass = classes.Green;
   const assignedClasses = [];
@@ -60,6 +60,9 @@ const Cockpit = (props) => {
       <h1>{props.title}</h1>
       <p className={assignedClasses.join(' ')}>Dynamic class</p>
       <button ref={toggleBtnRef} className={btnClass} onClick={props.clicked}>Toggle People</button>
+      <AuthContext.Consumer>
+        { context => <button onClick={context.loginHandler}>LogIn</button> }
+      </AuthContext.Consumer>
     </div>
   )
 }
